@@ -734,7 +734,7 @@ module Gruff
       label_widths = [[]] # Used to calculate line wrap
       @legend_labels.each do |label|
         metrics = @d.get_type_metrics(@base_image, label.to_s)
-        label_width = metrics.width + legend_square_width * 2.7
+        label_width = metrics.width + legend_square_width * 2.1
         label_widths.last.push label_width
 
         if sum(label_widths.last) > (@raw_columns * 0.9)
@@ -758,7 +758,8 @@ module Gruff
         @d.gravity = WestGravity
         @d = @d.annotate_scaled(@base_image,
                                 @raw_columns, 1.0,
-                                current_x_offset + (legend_square_width * 1.7), current_y_offset,
+                                current_x_offset + (legend_square_width * 1.4),
+                                current_y_offset + (@legend_labels.size > 5 ? 3 : 2),
                                 legend_label.to_s, @scale)
 
         # Now draw box with color of this dataset
@@ -771,7 +772,7 @@ module Gruff
 
         @d.pointsize = @legend_font_size
         metrics = @d.get_type_metrics(@base_image, legend_label.to_s)
-        current_string_offset = metrics.width + (legend_square_width * 2.7)
+        current_string_offset = metrics.width + (legend_square_width * 2.4)
 
         # Handle wrapping
         label_widths.first.shift
